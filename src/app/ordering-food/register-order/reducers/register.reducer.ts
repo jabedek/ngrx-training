@@ -4,17 +4,25 @@ import * as RegisterPageActions from '../actions/register.actions';
 
 export const registerFeatureKey = 'foodOrder';
 
+const meal: Meal = { food: 'pizza', size: 'big' };
+
+const order: FoodOrder = {
+  price: 5,
+  meal,
+  payer: 'dupa',
+};
+
 export const initialFoodOrdersState: FoodOrdersState = {
-  allOrders: [],
-  totalProfit: 0,
+  allOrders: [order],
+  totalProfit: 5,
 };
 
 const registerReducer = createReducer(
   initialFoodOrdersState,
   on(RegisterPageActions.registerFoodOrder, (state, order: FoodOrder) => {
     let newState = {
-      totalProfit: +(state.totalProfit + order.meal.price),
       allOrders: [...state.allOrders, order],
+      totalProfit: +(state.totalProfit + order.price),
     };
 
     console.log(newState);

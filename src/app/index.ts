@@ -4,13 +4,14 @@ export interface User {
 }
 
 export interface Meal {
-  payer: string;
-  name: string;
-  price: number;
+  food: string;
+  size: string;
 }
 
 export interface FoodOrder {
+  price: number;
   meal: Meal;
+  payer: string;
 }
 ////
 export interface FoodOrdersState {
