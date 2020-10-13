@@ -1,0 +1,27 @@
+<p>register-order works!</p>
+
+<p>--- Add new food-item form</p>
+<form [formGroup]="foodForm" (ngSubmit)="onSubmit()">
+  <label>
+    Food Name:
+    <input type="text" formControlName="name" />
+  </label>
+
+  <label>
+    Price:
+    <input type="number" formControlName="price" />
+  </label>
+
+  <label>
+    On whose account:
+
+    <div *ngIf="(registeredUsers$ | async).length">
+      <p *ngFor="let user of registeredUsers$ | async">
+        <input type="radio" formControlName="payer" [value]="user.login" />
+        {{ user.login }}
+      </p>
+    </div>
+  </label>
+
+  <button type="submit">Submit</button>
+</form>

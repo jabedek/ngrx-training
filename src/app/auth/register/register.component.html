@@ -1,0 +1,16 @@
+<p>register works!</p>
+
+<p>--- Add new user form</p>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <label>
+    Login:
+    <input type="text" formControlName="login" />
+  </label>
+
+  <label>
+    Password:
+    <input type="text" formControlName="password" />
+  </label>
+
+  <button type="submit">Submit</button>
+</form>
