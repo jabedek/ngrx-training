@@ -1,19 +1,8 @@
-export interface User {
-  login: string;
-  password: string;
+export interface AppState {
+  foodOrders: FoodOrdersState;
+  users: UsersState;
 }
 
-export interface Meal {
-  food: string;
-  size: string;
-}
-
-export interface FoodOrder {
-  price: number;
-  meal: Meal;
-  payer: string;
-}
-////
 export interface FoodOrdersState {
   allOrders: FoodOrder[];
   totalProfit: number;
@@ -21,9 +10,21 @@ export interface FoodOrdersState {
 
 export interface UsersState {
   registeredUsers: User[];
+  newestUser: User;
+}
+///
+
+export interface FoodOrder {
+  price: number;
+  food: string;
+  size: 'S' | 'M' | 'L';
+  payer: string;
 }
 
-export interface AppState {
-  foodOrders: FoodOrdersState;
-  users: UsersState;
+export interface User {
+  id: string;
+  login: string;
+  password: string;
 }
+
+////

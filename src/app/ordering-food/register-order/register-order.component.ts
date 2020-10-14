@@ -2,56 +2,53 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState, FoodOrder, Meal, User } from 'src/app';
+import { AppState, FoodOrder, User } from 'src/app';
 import {
   selectUsers,
   selectUsersRegisteredUsers,
 } from 'src/app/auth/register/selectors';
-import { registerFoodOrder } from './actions/register.actions';
-import { selectFoodOrderAllOrders } from './selectors';
+import { registerFoodOrder } from './actions/register-order.actions';
+import {
+  selectFoodOrderAllOrders,
+  selectFoodOrderTotalProfit,
+} from './selectors';
 
 @Component({
   selector: 'app-register-order',
   templateUrl: './register-order.component.html',
   styleUrls: ['./register-order.component.scss'],
 })
-export class RegisterOrderComponent implements OnInit, AfterViewInit {
+export class RegisterOrderComponent implements OnInit {
   registeredUsers$: Observable<User[]>;
-  allOrders$: Observable<FoodOrder[]>;
+  orders$: Observable<FoodOrder[]>;
+  profit$: Observable<number>;
 
   foodForm = new FormGroup({
-    name: new FormControl(''),
-    price: new FormControl(''),
+    name: new FormControl('pizza'),
+    price: new FormControl(12),
     payer: new FormControl(''),
+    size: new FormControl('L'),
   });
   constructor(public store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.registeredUsers$ = this.store.select(selectUsersRegisteredUsers);
-
-    // this.allOrders$ = this.store.select(selectFoodOrderAllOrders);
-
-    // console.log(this.registeredUsers$, this.allOrders$);
-  }
-
-  ngAfterViewInit() {
-    // this.allOrders$.subscribe((data) => {
-    //   console.log(data);
-    // });
-    // console.log(this.allOrders$.subscribe((data) => data));
+    this.orders$ = this.store.select(selectFoodOrderAllOrders);
+    this.profit$ = this.store.select(selectFoodOrderTotalProfit);
   }
 
   onSubmit() {
-    let meal: Meal = {
-      food: this.foodForm.get('name').value,
-      size: 'big',
-    };
     let order: FoodOrder = {
-      meal,
-      payer: this.foodForm.get('payer').value,
-      price: this.foodForm.get('price').value,
+      food: this.foodForm.get('name').value || 'spaghetti bolognese',
+      size: this.foodForm.get('size').value || 'L',
+      payer: this.foodForm.get('payer').value || 'brain-root',
+      price: this.foodForm.get('price').value || 420,
     };
     this.store.dispatch(registerFoodOrder(order));
     this.foodForm.reset();
+
+    this.store
+      .select(selectFoodOrderAllOrders)
+      .subscribe((data) => console.log(data));
   }
 }

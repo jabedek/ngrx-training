@@ -13,21 +13,48 @@
   </label>
 
   <label>
-    On whose account:
+    <p>Meal size:</p>
+    <p>
+      <label>
+        <input type="radio" formControlName="size" [value]="'S'" />
+        S
+      </label>
+    </p>
+    <p>
+      <label>
+        <input type="radio" formControlName="size" [value]="'M'" />
+        M
+      </label>
+    </p>
+    <p>
+      <label>
+        <input type="radio" formControlName="size" [value]="'L'" />
+        L
+      </label>
+    </p>
+  </label>
 
-    <div *ngIf="(registeredUsers$ | async).length">
-      <p *ngFor="let user of registeredUsers$ | async">
+  <label *ngIf="(registeredUsers$ | async).length">
+    <p>On whose account:</p>
+    <p *ngFor="let user of registeredUsers$ | async">
+      <label>
         <input type="radio" formControlName="payer" [value]="user.login" />
+        {{ user.id }}
         {{ user.login }}
-      </p>
-    </div>
+        {{ user.password }}
+      </label>
+    </p>
   </label>
 
   <button type="submit">Submit</button>
 </form>
-
-<!-- <div *ngIf="allOrders$">
-  <p *ngFor="let user of allOrders$ | async">
-    {{ user }}
+<div *ngIf="profit$ | async as profit">
+  <p>:::: [total profit]: {{ profit }}</p>
+</div>
+<div *ngIf="(orders$ | async).length">
+  :::: [orders history]:
+  <p *ngFor="let order of orders$ | async">
+    :::::::::::::::: {{ order.food }} {{ order.size }} {{ order.price }}
+    {{ order.payer }}
   </p>
-</div> -->
+</div>

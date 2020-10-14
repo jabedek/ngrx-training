@@ -3,6 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState, User } from 'src/app';
 import { registerUser } from './actions/register.actions';
+import { selectUsersRegisteredUsers } from './selectors';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-register',
@@ -20,9 +22,16 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    let user: User = this.userForm.value;
+    let user: User = { ...this.userForm.value, id: uuid.v4() };
+
+    console.log(user);
 
     this.store.dispatch(registerUser(user));
     this.userForm.reset();
+
+    this.store
+      .select(selectUsersRegisteredUsers)
+      .subscribe((data) => console.log(data))
+      .unsubscribe();
   }
 }

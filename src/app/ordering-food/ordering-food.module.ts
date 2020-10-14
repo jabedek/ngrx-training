@@ -5,7 +5,7 @@ import { OrderingFoodRoutingModule } from './ordering-food-routing.module';
 import { RegisterOrderComponent } from './register-order/register-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import * as fromRegisterOrderReducer from './register-order/reducers/register.reducer';
+import * as fromRegisterOrderReducer from './register-order/reducers/register-order.reducer';
 
 @NgModule({
   declarations: [RegisterOrderComponent],
