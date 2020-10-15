@@ -12,39 +12,27 @@
     <input type="number" formControlName="price" />
   </label>
 
+
   <label>
-    <p>Meal size:</p>
-    <p>
-      <label>
-        <input type="radio" formControlName="size" [value]="'S'" />
-        S
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="radio" formControlName="size" [value]="'M'" />
-        M
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="radio" formControlName="size" [value]="'L'" />
-        L
-      </label>
-    </p>
+    Size:
+    <select formControlName="size">
+      <option value="S">S</option>
+      <option value="M">M</option>
+      <option value="L">L</option>
+    </select>
   </label>
 
-  <label *ngIf="(registeredUsers$ | async).length">
-    <p>On whose account:</p>
-    <p *ngFor="let user of registeredUsers$ | async">
-      <label>
-        <input type="radio" formControlName="payer" [value]="user.login" />
-        {{ user.id }}
+
+  <label *ngIf="registeredUsers$ | async as users">
+    On whose account:
+    <select formControlName="payer">
+      <option *ngFor="let user of users" [value]="user">
         {{ user.login }}
-        {{ user.password }}
-      </label>
-    </p>
+      </option>
+    </select>
   </label>
+
+
 
   <button type="submit">Submit</button>
 </form>
