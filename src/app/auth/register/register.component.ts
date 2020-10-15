@@ -17,12 +17,13 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  constructor(public store: Store<AppState>) {}
+  constructor(public store: Store<AppState>) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSubmit() {
-    let user: User = { ...this.userForm.value, id: uuid.v4() };
+
+    let user: User = { login: this.userForm.get('login').value || 'brain-root', password: this.userForm.get('password').value || "admin123", id: uuid.v4() };
 
     console.log(user);
 

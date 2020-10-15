@@ -25,8 +25,8 @@ export const initialUsersState: UsersState = {
 
 const registerReducer = createReducer(
   initialUsersState,
-  on(RegisterPageActions.registerUser, (state, { login, password }) => ({
-    registeredUsers: [...state.registeredUsers, { login, password }],
+  on(RegisterPageActions.registerUser, (state, { id, login, password }) => ({
+    registeredUsers: [...state.registeredUsers, { id, login, password }],
   }))
 );
 
