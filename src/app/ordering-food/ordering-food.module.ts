@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { OrderingFoodRoutingModule } from './ordering-food-routing.module';
-import { RegisterOrderComponent } from './register-order/register-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import * as fromRegisterOrderReducer from './register-order/reducers/register-order.reducer';
+import { RegisterOrderComponent } from './register-order/register-order.component';
 
 @NgModule({
   declarations: [RegisterOrderComponent],
@@ -20,4 +20,4 @@ import * as fromRegisterOrderReducer from './register-order/reducers/register-or
     ),
   ],
 })
-export class OrderingFoodModule {}
+export class OrderingFoodModule { }

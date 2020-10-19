@@ -10,7 +10,7 @@ export const initialFoodOrdersState: FoodOrdersState = {
       price: 5,
       food: 'pizza',
       size: 'M',
-      payer: 'brain',
+      payer: 'brain-root',
     },
   ],
   totalProfit: 5,
@@ -21,6 +21,8 @@ const registerOrderReducer = createReducer(
   on(
     RegisterPageActions.registerFoodOrder,
     (state, { price, food, size, payer }) => {
+      console.log(payer);
+
       let newState = {
         allOrders: [...state.allOrders, { price, food, size, payer }],
         totalProfit: +(state.totalProfit + price),

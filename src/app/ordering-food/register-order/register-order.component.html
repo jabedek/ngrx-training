@@ -26,8 +26,8 @@
   <label *ngIf="registeredUsers$ | async as users">
     On whose account:
     <select formControlName="payer">
-      <option *ngFor="let user of users" [value]="user">
-        {{ user.login }}
+      <option *ngFor="let user of users" [value]="user.id">
+        {{user.password}} {{ user.login }}
       </option>
     </select>
   </label>
@@ -36,12 +36,15 @@
 
   <button type="submit">Submit</button>
 </form>
+
+
 <div *ngIf="profit$ | async as profit">
   <p>:::: [total profit]: {{ profit }}</p>
 </div>
-<div *ngIf="(orders$ | async).length">
+
+<div *ngIf="orders$ | async as ordersData">
   :::: [orders history]:
-  <p *ngFor="let order of orders$ | async">
+  <p *ngFor="let order of ordersData">
     :::::::::::::::: {{ order.food }} {{ order.size }} {{ order.price }}
     {{ order.payer }}
   </p>
